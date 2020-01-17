@@ -1,0 +1,53 @@
+<html>
+  <head>
+      <title>Everything Can be a Link with Mozilla's window.getSelection() Method and the W3C DOM Range API</title>
+
+      <script type="text/javascript" src="ahoy.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="./assets/article.css">
+
+  </head>
+  <body>
+        <h2>Everything Can be a Link with Mozilla's window.getSelection() Method and the W3C DOM Range API</h2>
+        by Brian Donovan<br/>
+        7/09/02 (ahoy.js updated 5/06/03)<br/><br/>
+
+        <a href="working/ahoy.zip">Download Ahoy (GPL)</a> : 19 Kb zipfile, 49 Kb .js file (prune out copious comments to get the file size down)<br/>
+        <a href="mailto:ahoytechnical@lophty.com">Comments, bugs, suggestions</a>
+
+        <br/><br/>
+        <h4>This page is a demo</h4>
+        <p>
+            <i>
+                (If you're using Mozilla or a Mozilla-based browser, Alt+clicking and dragging across a text fragment will trigger Ahoy and furnish you with an Ahoy link to your selection.)
+            </i>
+        </p>
+
+        <p>
+            <i>
+                Note : An extended discussion of the mechanics of Ahoy is available in my tutorial at IBM developerWorks (<a href="https://web.archive.org/web/20090224011819/http://www-106.ibm.com/developerworks/web/edu/wa-dw-wamozwgs-i.html" title="read &quot;Link with Mozilla's window.getSelection() method&quot;">link</a>, registration required), published October 2002.  A draft of the article is also available <a href="article.htm">here</a>.  Please feel free to download and use Ahoy (available under the GPL).  Simply link the script into your documents using an empty <code>&#60;script&#62;</code> element with its <code>src</code> attribute value pointing to ahoy.js. 
+            </i>
+        </p>
+
+        <p>
+            In coding Ahoy, my goal was to enable user-driven text selection and linking throughout web pages for visitors piloting Mozilla, Netscape 6.x, Netscape 7.x, and other Mozilla-based browsers through JavaScript, the W3C DOM, and Mozilla's <code>getSelection()</code> DOM extension.  I've dubbed the system that I created and implemented along these lines at my own site "Ahoy", in-keeping with the nautical theme underlying so much of the web lexicon (navigator for web browser, anchor elements for linking, etc.).  
+        </p>
+
+        <h3>Some Considerations</h3>
+
+        <p>
+            The offsets provided by Mozilla's select object (<code>anchorOffset</code> and <code>focusOffset</code>) seem to ignore multiple spaces within selections, treating them, for counting purposes, as single chars, but the <code>toString()</code> method of the Range object, as implemented in Mozilla, respects multiple spaces in the source, causing the length of the text child nodes within the Ahoy anchors created from text selections containing multiple spaces to be shorter by the the sum of the number of consecutive multiple spaces minus one.  This is something that can be dealt with, but I haven't tackled it yet.
+        </p>
+
+        <p>
+            Because Ahoy references a piece of text by its offset and length within its text node, the index of the selection's text node within the childNodes collection of its parent, and  either the index of the text node's parent element node within the collection of element nodes returned by <code>getElementsByTagName()</code> or the ID attribute value of the text node's parent node, existing Ahoy links to documents can be broken by editing.
+        </p>
+
+        <h3>Updates</h3>
+
+        <p>
+            <i>May 06 2003</i> 1.1 release : In response to a change in Mozilla's behavior w/respect to the target property of event objects fired by mousedown and mouseup events, Ahoy now takes advantage of the anchorNode and focusNode properties of Mozilla's native Selection objects.
+        </p>
+
+  </body>
+</html>

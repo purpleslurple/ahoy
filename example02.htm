@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Everything Can be a Link with Mozilla's window.getSelection() Method and the W3C DOM Range API, Example 02</title>
+
+        <script type="text/javascript">
+            function ahyObjSelectedTextRange()    
+            {    
+                this.ahyMousedownContainer = null;
+                this.ahyMouseupContainer = null;
+                this.ahySelection = null;
+                this.ahySelectionString = null;
+                this.ahySelectionLength = null;
+                this.ahy_StartSelect = ahy_StartSelect;    
+                this.ahy_EndSelect = ahy_EndSelect;    
+                function ahy_StartSelect(event){    
+                    if (event.altKey){
+                        this.ahyMousedownContainer = event.target;
+                    }
+                }    
+                function ahy_EndSelect(event)    
+                {    
+                    if (event.altKey){
+                        this.ahyMouseupContainer = event.target;
+                        //=====================================
+                        // proprietary Moz dom stuff
+                        //=====================================
+                        this.ahySelection = window.getSelection();
+                        this.ahySelectionString = this.ahySelection.toString();
+                        this.ahySelectionLength = this.ahySelectionString.length;
+                        var intSelectionAnchorOffset = this.ahySelection.anchorOffset;
+                        var intSelectionFocusOffset = this.ahySelection.focusOffset;
+                        //=====================================
+                        if(this.ahySelectionLength == 0){
+                            alert("Zero Characters Selected");
+                            return false;
+                        }
+                        alert("this.ahySelectionString : \n"+this.ahySelectionString);
+                    }
+                }    
+            }    
+
+            function ahy_DoOnLoad()    
+            {    
+                    if(window.getSelection){    
+                            var blnRangeImplemented = document.implementation.hasFeature("Range", "2.0");    
+                            if(blnRangeImplemented){    
+                                    objSelectedTextRange = new ahyObjSelectedTextRange();    
+                                    document.addEventListener("mousedown", objSelectedTextRange.ahy_StartSelect, false);    
+                                    document.addEventListener("mouseup", objSelectedTextRange.ahy_EndSelect, false);    
+                            }else{    
+                                    alert("Sorry, but your browser does not support the W3C Level 2 DOM Range API.");
+                            }    
+                    }else{    
+                            alert("Sorry, but your browser does not support the window.getSelection() method.");
+                    }    
+            }
+
+
+            if(window.addEventListener){
+                window.addEventListener("load", ahy_DoOnLoad, false);
+            }else{
+                alert("Sorry, but your browser does not support the addEventListener() method.");
+            }
+        </script>
+
+
+    </head>
+    <body>
+
+        <h1 id="title">The Winter's Tale : Act 1, Scene 1</h1>
+
+        <i>Enter CAMILLO and ARCHIDAMUS.</i>
+
+        <dl>
+
+        <dt>ARCHIDAMUS:</dt>
+        <dd>If you shall chance, Camillo, to visit Bohemia on the like 
+occasion whereon my services are now on foot, you shall see, as I have 
+said, great difference betwixt our Bohemia and your Sicilia.</dd>
+
+        <dt>CAMILLO: </dt>
+        <dd>I think, this coming summer, the King of Sicilia means to pay Bohemia the visitation which he justly owes him.</dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>Wherein our entertainment shall shame us: we will be justified in our loves; for indeed</dd>
+
+        <dt>CAMILLO: </dt>
+        <dd>Beseech you </dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>Verily, I speak it in the freedom of my knowledge: we cannot
+ with such magnificence -- in so rare -- I know not what to say -- We 
+will give you sleepy drinks, that your senses, unintelligent of our 
+insufficience, may, though they cannot praise us, as little accuse us.</dd>
+
+        <dt>CAMILLO: </dt>
+        <dd>You pay a great deal too dear for what's given freely.</dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>Believe me, I speak as my understanding instructs me, and as mine honesty puts it to utterance.</dd>
+        
+        <dt>CAMILLO: </dt>
+        <dd>Sicilia cannot show himself overkind to Bohemia. They were 
+trained together in their childhoods; and there rooted betwixt them then
+ such an affection, which cannot choose but branch now.  Since their 
+more mature dignities and royal necessities made separation of their 
+society, their encounters, though not personal, have been royally 
+attorneyed with interchange of gifts, letters, loving embassies, that 
+they have seemed to be together, though absent; shook hands, as over a 
+vast; and embraced as it were from the ends of opposed winds. The 
+heavens continue their loves!</dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>I think there is not in the world either malice or matter to
+ alter it. You have an unspeakable comfort of your young prince 
+Mamillius: it is a gentleman of the greatest promise that ever came into
+ my note.</dd>
+
+        <dt>CAMILLO: </dt>
+        <dd>I very well agree with you in the hopes of him; it is a 
+gallant child; one that, indeed, physics the subject, makes old hearts 
+fresh. They that went on crutches ere he was born desire yet their life 
+to see him a man.</dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>Would they else be content to die?</dd>
+
+        <dt>CAMILLO: </dt>
+        <dd>Yes; if there were no other excuse why they should desire to live.</dd>
+
+        <dt>ARCHIDAMUS: </dt>
+        <dd>If the King had no son, they would desire to live on crutches till he had one. </dd>
+
+        </dl>
+       
+         <i>Exeunt.</i>
+
+    
+
+    </body>
+</html>
